@@ -25,6 +25,13 @@ pipeline {
             steps {
                 sh './jenkins/scripts/deliver.sh'
             }
+            post {
+                always {
+                     dir("${BASE_DIR}"){
+                archiveArtifacts(allowEmptyArchive: true, artifacts: 'target/*.jar')
+              }
+                }
+            }
         }
     }
 }
